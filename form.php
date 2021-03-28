@@ -53,7 +53,7 @@
 </head>
 <body>
 
-<form action="action.php" method="post">
+<form action="action.php" method="post" onSubmit="if(!confirm('Proceed with the selected columns?')){return false;}">
 	<fieldset>
 	<legend>Set Fields:</legend>
 	<table class="center">

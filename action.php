@@ -101,8 +101,8 @@ session_start();
 </html>
 
 <?php
-  /*unlink($_SESSION['file1']);
+  unlink($_SESSION['file1']);
   unlink($_SESSION['file2']);
   session_unset();
-  session_destroy();*/
+  session_destroy();
  ?>
