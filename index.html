@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Welcome!</title>
+    <style media="screen">
+      .Upload {
+        margin: auto;
+        width: 50%;
+        border: 3px solid skyBlue;
+        padding: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="Form">
+    <form action="fileUpload.php" method="post" enctype="multipart/form-data">
+      <table class="Upload">
+      <tr>
+        <td><label for="sourceFile">Select Source Excel File:</label></td>
+        <td><input type="file" name="sourceFile" value="SourceFile"></td>
+      </tr>
+      <tr>
+        <td>&nbsp</td>
+      </tr>
+      <tr>
+        <td><label for="targetFile">Select Target Excel File:</label></td>
+        <td><input type="file" name="targetFile" value="TargetFile"></td>
+      </tr>
+      <tr>
+          <td>&nbsp</td>
+      </tr>
+      <tr>
+        <td><input type="submit" name="Upload" value="Upload"></td>
+      </tr>
+    </table>
+    </form>
+    </div>
+  </body>
+</html>
