@@ -70,9 +70,13 @@ session_start();
     <div>
       <p>Sub CopyColumns()</p>
       <p><tab1>Dim Source As Worksheet, Target As Worksheet, TargetH As Worksheet</tab1></p>
-      <p><tab1>Set Source = Workbooks("Source.xlsx").Worksheets("<?php echo "$S_sheetName"; ?>")</tab1></p>
-      <p><tab1>Set Target = Workbooks("Target.xlsx").Worksheets("Sheet1")</tab1></p>
-      <p><tab1>Set SourceH = Workbooks("ExcelFileWithHeaders.xlsx").Worksheets("<?php echo "$T_sheetName"; ?>")</tab1></p>
+      <p><strong>'Make sure the the filenames and sheetnames are correct, otherwise You will get an<br>'error!</strong></p>
+      <p><strong>'Source is the excel file from where you want to transfer data.</strong></p>
+      <p><tab1>Set Source = Workbooks("<?php echo $_SESSION['file1']; ?>").Worksheets("<?php echo "$S_sheetName"; ?>")</tab1></p><br>
+      <p><strong>'Target is an empty Excel file, where you will get your desired data.</strong></p>
+      <p><tab1>Set Target = Workbooks("Book1.xlsx").Worksheets("Sheet1")</tab1></p><br>
+      <p><strong>'TargetH is the excel sheet where the final excel sheet's headers are.</strong></p>
+      <p><tab1>Set SourceH = Workbooks("<?php echo $_SESSION['file2']; ?>").Worksheets("<?php echo "$T_sheetName"; ?>")</tab1></p>
       <br>
       <?php
         for ($i=0; $i < count($sourceIndex); $i++) {
@@ -80,9 +84,9 @@ session_start();
         }
       ?>
       <p><tab1>SourceH.Range("A1").EntireRow.Copy Destination:=Target.Range("A1").EntireRow</tab1></p>
-      <p>'Following code was tested on Excel 2019, it may not work perfectly on previous versions.<br>
+      <p><strong>'Following code was tested on Excel 2019, it may not work perfectly on previous versions.<br>
         'If an error occurs, comment the below "With ... End With" section using single quotes('),<br>
-        'the way this message is commented. Or else you could simply delete that code portion.</p>
+        'the way this message is commented. Or else you could simply delete that code portion.</strong></p>
       <p><tab1>With Target</tab1></p>
       <p><tab2>.Activate</tab2></p>
       <p><tab2>.Cells.Select</tab2></p>
