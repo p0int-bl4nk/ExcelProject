@@ -11,8 +11,9 @@
      echo SimpleXLSX::parseError();
    }
 
-  $xlsx_T = SimpleXLSX::parse($_SESSION['file2']);
-  $headersTARGET = $xlsx_T->rows()[0];
+  $xlsx_T = SimpleXLSX::parse($_SESSION['file2']);                //Create a Target excel file object
+  $headersTARGET = $xlsx_T->rows()[0];                            //Create an array and store first row of the excel sheet i.e., the header row
+
 ?>
 
 
@@ -53,7 +54,7 @@
 </head>
 <body>
 
-<form action="action.php" method="post" onSubmit="if(!confirm('Proceed with the selected columns?')){return false;}">
+<form action="action.php" method="post" onSubmit="if(!confirm('Proceed with the selected columns?')){return false;}">     //'onSubmit' prompts user to confirm 'Submit' operation
 	<fieldset>
 	<legend>Set Fields:</legend>
 	<table class="center">
@@ -65,14 +66,14 @@
 	<?php
     foreach($headersSOURCE as $valueS) {
   	echo "<tr><td>"
-			.$valueS.
+			.$valueS.                                                  //list source file headers
   		"</td>
 
   		<td>";
    		echo '<input list="Output File Fields" name="'.$valueS.'" style="width: 60%;">
   		      <datalist id="Output File Fields">';
             foreach ($headersTARGET as $valueT) {
-  			       echo '<option value="'.$valueT.'">';}
+  			       echo '<option value="'.$valueT.'">';}            //datalist of target file headers for each source file header
   		echo "</datalist>
 		    </td>
 	   </tr>";  }?>

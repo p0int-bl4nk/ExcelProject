@@ -2,30 +2,30 @@
 session_start();
   require 'SimpleXLSX.php';
 
-  $xlsx_S = SimpleXLSX::parse($_SESSION['file1']);
-  $headersSOURCE = $xlsx_S->rows()[0];
+  $xlsx_S = SimpleXLSX::parse($_SESSION['file1']);                      //Create a Source excel file object
+  $headersSOURCE = $xlsx_S->rows()[0];                                  //Create an array and store first row of the excel sheet i.e., the header row
 
-  $xlsx_T = SimpleXLSX::parse($_SESSION['file2']);
-  $headersTARGET = $xlsx_T->rows()[0];
+  $xlsx_T = SimpleXLSX::parse($_SESSION['file2']);                      //Create a Target excel file object
+  $headersTARGET = $xlsx_T->rows()[0];                                  //Create an array and store first row of the excel sheet i.e., the header row
 
-  $sourceIndex = array();
-  $targetIndex = array();
+  $sourceIndex = array();                                               //  these arrays will store index values of source columns
+  $targetIndex = array();                                               //  and their corresponding selected target column
 
     foreach ($headersSOURCE as $key_S => $value_S) {
-      if (empty($_POST["$value_S"])) {
-        continue;
+      if (empty($_POST["$value_S"])) {                                  //$_POST[] will be empty if no targer column is selected for some source column
+        continue;                                                       // and thus that index need not be stored
       }
-      $sourceIndex []= $key_S+1;
+      $sourceIndex []= $key_S+1;                                        //$key_S + 1, as array indexing starts from zero but in excel indexing starts from 1
 
       foreach ($headersTARGET as $key_T => $value_T) {
-        if (!strcmp($value_T, $_POST["$value_S"])) {
-          $targetIndex []= $key_T+1;
+        if (!strcmp($value_T, $_POST["$value_S"])) {                    // strcmp let's only those target headers which were selected
+          $targetIndex []= $key_T+1;                                    // and their index is stored
         }
       }
     }
 
-    function GetExcelColumnName($columnNumber) {
-      $columnName = '';
+    function GetExcelColumnName($columnNumber) {                        //this function is used to get excel column name like 'BCD1' from a column index
+      $columnName = '';                                                 //but only the alphabet part
       while ($columnNumber > 0) {
         $modulo = ($columnNumber - 1) % 26;
         $columnName = chr(65 + $modulo) . $columnName;
