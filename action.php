@@ -15,21 +15,21 @@ session_start();
       if (empty($_POST["$value_S"])) {
         continue;
       }
-      $sourceIndex []= $key_S+1;
 
       foreach ($headersTARGET as $key_T => $value_T) {
         if (!strcmp($value_T, $_POST["$value_S"])) {
           $targetIndex []= $key_T+1;
+          $sourceIndex []= $key_S+1;
         }
       }
     }
 
-    function GetExcelColumnName($columnNumber) {
+    function getExcelColumnName($columnNumber) {
       $columnName = '';
+      $remainder = ($columnNumber - 1) % 26;
       while ($columnNumber > 0) {
-        $modulo = ($columnNumber - 1) % 26;
-        $columnName = chr(65 + $modulo) . $columnName;
-        $columnNumber = (int)(($columnNumber - $modulo) / 26);
+        $columnName = chr(65 + $remainder) . $columnName;
+        $columnNumber = (int)(($columnNumber - $remainder) / 26);
       }
       return $columnName;
     }
@@ -70,23 +70,16 @@ session_start();
     <div>
       <p>Sub CopyColumns()</p>
       <p><tab1>Dim Source As Worksheet, Target As Worksheet, TargetH As Worksheet</tab1></p>
-      <p><strong>'Make sure the the filenames and sheetnames are correct, otherwise You will get an<br>'error!</strong></p>
-      <p><strong>'Source is the excel file from where you want to transfer data.</strong></p>
-      <p><tab1>Set Source = Workbooks("<?php echo $_SESSION['file1']; ?>").Worksheets("<?php echo "$S_sheetName"; ?>")</tab1></p><br>
-      <p><strong>'Target is an empty Excel file, where you will get your desired data.</strong></p>
-      <p><tab1>Set Target = Workbooks("Book1.xlsx").Worksheets("Sheet1")</tab1></p><br>
-      <p><strong>'TargetH is the excel sheet where the final excel sheet's headers are.</strong></p>
+      <p><tab1>Set Source = Workbooks("<?php echo $_SESSION['file1']; ?>").Worksheets("<?php echo "$S_sheetName"; ?>")</tab1></p>
+      <p><tab1>Set Target = Workbooks("Book1.xlsx").Worksheets("Sheet1")</tab1></p>
       <p><tab1>Set SourceH = Workbooks("<?php echo $_SESSION['file2']; ?>").Worksheets("<?php echo "$T_sheetName"; ?>")</tab1></p>
       <br>
       <?php
         for ($i=0; $i < count($sourceIndex); $i++) {
-          echo '<p><tab1>Source.Range("'.GetExcelColumnName($sourceIndex[$i]).'1").EntireColumn.Copy Destination:=Target.Range("'.GetExcelColumnName($targetIndex[$i]).'1").EntireColumn</tab2></p>';
+          echo '<p><tab1>Source.Range("'.getExcelColumnName($sourceIndex[$i]).'1").EntireColumn.Copy Destination:=Target.Range("'.getExcelColumnName($targetIndex[$i]).'1").EntireColumn</tab2></p>';
         }
       ?>
       <p><tab1>SourceH.Range("A1").EntireRow.Copy Destination:=Target.Range("A1").EntireRow</tab1></p>
-      <p><strong>'Following code was tested on Excel 2019, it may not work perfectly on previous versions.<br>
-        'If an error occurs, comment the below "With ... End With" section using single quotes('),<br>
-        'the way this message is commented. Or else you could simply delete that code portion.</strong></p>
       <p><tab1>With Target</tab1></p>
       <p><tab2>.Activate</tab2></p>
       <p><tab2>.Cells.Select</tab2></p>
