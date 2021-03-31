@@ -17,15 +17,15 @@ session_start();
       }
 
       foreach ($headersTARGET as $key_T => $value_T) {
-        if (!strcmp($value_T, $_POST["$value_S"])) {
+        if (!strcmp($value_T, $_POST["$value_S"])) {                    //Store indexes of selected columns
           $targetIndex []= $key_T+1;
           $sourceIndex []= $key_S+1;
         }
       }
     }
 
-    function getExcelColumnName($columnNumber) {
-      $columnName = '';
+    function getExcelColumnName($columnNumber) {                        /*This function is used to get column name for a number. */
+      $columnName = '';                                                 /*For eg: column number 23 means 'W' column in an excel sheet*/
       $remainder = ($columnNumber - 1) % 26;
       while ($columnNumber > 0) {
         $columnName = chr(65 + $remainder) . $columnName;
@@ -34,7 +34,7 @@ session_start();
       return $columnName;
     }
 
-    $S_sheetName = $xlsx_S->sheetNames()[0];
+    $S_sheetName = $xlsx_S->sheetNames()[0];                            /*Store Worksheet names of Excel files. S = Source & T = Target*/
     $T_sheetName = $xlsx_T->sheetNames()[0];
 
 ?>
