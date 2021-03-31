@@ -29,4 +29,13 @@ VBA code which the user has to run in Excel VB Editor. And that's it.
 I ran these files in Xampp, php 8.0.3 and the VB Code on Excel 2019.
 
 IMPORTANT NOTE:
-1. Before running the VB Code, there must be 3 Excel files open, Source.xlsx, TargetWithHeaders.xlsx, and an empty excel sheet(where the data will actually go).
+1. Before running the VB Code, there must be 3 Excel files open, the two uploaded excel files, and an empty excel sheet(where the data will actually go).
+2. All three files must be in the same folder. If they are not then you must specify there full path.
+        For example: If Source.xlsx is in C://Files and, 
+                        Target.xlsx is in C://Files2
+                     Then following must be done,
+                     Set Source = Workbooks("C://Files/Source.xlsx").Worksheets("Sheet1")
+                     Set Source = Workbooks("C://Files2/Target.xlsx").Worksheets("Sheet1")
+
+
+
