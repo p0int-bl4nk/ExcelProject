@@ -54,7 +54,7 @@
 </head>
 <body>
 
-<form action="action.php" method="post" onSubmit="if(!confirm('Proceed with the selected columns?')){return false;}">     //'onSubmit' prompts user to confirm 'Submit' operation
+<form action="action.php" method="post" onSubmit="if(!confirm('WARNING: Incorrect input will be discarded! Proceed with the selected columns?')){return false;}">
 	<fieldset>
 	<legend>Set Fields:</legend>
 	<table class="center">
@@ -70,7 +70,7 @@
   		"</td>
 
   		<td>";
-   		echo '<input list="Output File Fields" name="'.$valueS.'" style="width: 60%;">
+   		echo '<input list="Output File Fields" name="'.$valueS.'" style="width: 60%;" placeholder="None">
   		      <datalist id="Output File Fields">';
             foreach ($headersTARGET as $valueT) {
   			       echo '<option value="'.$valueT.'">';}            //datalist of target file headers for each source file header
