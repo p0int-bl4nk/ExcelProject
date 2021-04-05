@@ -69,7 +69,7 @@ session_start();
   <body>
     <div>
       <p>Sub CopyColumns()</p>
-      <p><tab1>Dim Source As Worksheet, Target As Worksheet, TargetH As Worksheet</tab1></p>
+      <p><tab1>Dim Source As Worksheet, Target As Worksheet, SourceH As Worksheet</tab1></p>
       <p><tab1>Set Source = Workbooks("<?php echo $_SESSION['file1']; ?>").Worksheets("<?php echo "$S_sheetName"; ?>")</tab1></p>
       <p><tab1>Set Target = Workbooks("Book1.xlsx").Worksheets("Sheet1")</tab1></p>
       <p><tab1>Set SourceH = Workbooks("<?php echo $_SESSION['file2']; ?>").Worksheets("<?php echo "$T_sheetName"; ?>")</tab1></p>
