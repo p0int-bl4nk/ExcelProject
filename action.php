@@ -26,13 +26,13 @@ session_start();
 
     function getExcelColumnName($columnNumber) {                        /*This function is used to get column name for a number. */
       $columnName = '';                                                 /*For eg: column number 23 means 'W' column in an excel sheet*/
-      $remainder = ($columnNumber - 1) % 26;
       while ($columnNumber > 0) {
-        $columnName = chr(65 + $remainder) . $columnName;
-        $columnNumber = (int)(($columnNumber - $remainder) / 26);
+        $modulo = ($columnNumber - 1) % 26;
+        $columnName = chr(65 + $modulo) . $columnName;
+        $columnNumber = (int)(($columnNumber - $modulo) / 26);
       }
       return $columnName;
-    }
+    } 
 
     $S_sheetName = $xlsx_S->sheetNames()[0];                            /*Store Worksheet names of Excel files. S = Source & T = Target*/
     $T_sheetName = $xlsx_T->sheetNames()[0];
