@@ -54,7 +54,7 @@
 </head>
 <body>
 
-<form action="action.php" method="post" onSubmit="if(!confirm('WARNING: Incorrect input will be discarded! Proceed with the selected columns?')){return false;}">
+<form action="action.php" method="post" onSubmit="if(!confirm('WARNING: Incorrect input will be discarded! Proceed with the selected columns?')){return false;}" target="_blank">
 	<fieldset>
 	<legend>Set Fields:</legend>
 	<table class="center">
